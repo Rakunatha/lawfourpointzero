@@ -1,642 +1,535 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSL's LAW 4.0 | Legal Frameworks for Technology & Innovation</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Manatune</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F7F4; --w:#fff; --ink:#0F0F0F; --2:#666; --3:#AAA; --4:#E4E3DF;
+  --g:#1A7A48; --a:#8A5800; --r:#A32020; --b:#1A447A;
+  --f:'DM Sans',system-ui,sans-serif; --m:'DM Mono',monospace; --rad:5px;
+}
+body{font-family:var(--f);background:var(--bg);color:var(--ink);height:100vh;overflow:hidden;-webkit-font-smoothing:antialiased;font-size:13px}
 
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
+/* ─ NAV ─ */
+nav{
+height:48px; padding:0 28px;
+display:flex; align-items:center;
+background:rgba(248,247,244,.96);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(–4);
+position:relative; z-index:50;
+}
+.logo{font-size:13.5px;font-weight:500;letter-spacing:-.3px;cursor:pointer;margin-right:32px;display:flex;align-items:center;gap:7px;flex-shrink:0}
+.logo-sq{width:19px;height:19px;border:1.5px solid var(–ink);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;letter-spacing:0}
+.tabs{display:flex;flex:1;gap:0}
+.tab{
+padding:0 15px; height:48px;
+display:flex; align-items:center; gap:6px;
+font-size:12.5px;font-weight:300;color:var(–3);
+cursor:pointer;border:none;background:none;font-family:var(–f);
+border-bottom:1.5px solid transparent;
+transition:color .15s,border-color .15s;
+position:relative;top:1px;
+white-space:nowrap;
+}
+.tab:hover{color:var(–2)}
+.tab.on{color:var(–ink);border-bottom-color:var(–ink);font-weight:400}
+.tab-dot{width:5px;height:5px;border-radius:50%;background:var(–g);margin-top:1px}
+.tab-badge{font-size:9px;font-family:var(–m);background:var(–r);color:#fff;padding:1px 5px;border-radius:3px;font-weight:400}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:9px}
+.av{width:26px;height:26px;border-radius:50%;background:var(–ink);color:#fff;font-size:9.5px;font-weight:500;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
 
-        .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+/* ─ BUTTONS ─ */
+.btn{font-family:var(–f);cursor:pointer;border-radius:var(–rad);font-size:12px;font-weight:400;border:none;transition:all .12s;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.bo{padding:6px 12px;background:0;border:1px solid var(–4);color:var(–2)}.bo:hover{border-color:var(–3);color:var(–ink)}
+.bs{padding:6px 14px;background:var(–ink);color:#fff}.bs:hover{background:#2a2a2a}
+.bsm{padding:4px 10px;font-size:11px}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDYwIDAgTCAwIDAgMCA2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JpZCkiLz48L3N2Zz4=') repeat;
-            opacity: 0.1;
-        }
+/* ─ VIEWS ─ */
+.views{height:calc(100vh - 48px);position:relative;overflow:hidden}
+.view{
+position:absolute;inset:0;
+padding:36px 40px;
+overflow-y:auto;
+opacity:0;transform:translateY(10px);
+pointer-events:none;
+transition:opacity .22s ease, transform .22s ease;
+}
+.view.on{opacity:1;transform:translateY(0);pointer-events:all}
+.view.out-up{opacity:0;transform:translateY(-8px)}
 
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
-        }
+/* ─ PILL ─ */
+.p{padding:2px 7px;border-radius:3px;font-size:10px;font-weight:400;font-family:var(–m);white-space:nowrap;flex-shrink:0}
+.pg{background:#E7F3ED;color:var(–g)} .pa{background:#FDF2E3;color:var(–a)}
+.pb{background:#E7EEF8;color:var(–b)} .pr{background:#F8E8E8;color:var(–r)}
+.pn{background:var(–bg);color:var(–3);border:1px solid var(–4)}
 
-        .floating-element {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-        }
+/* ─ CARD ─ */
+.card{background:var(–w);border:1px solid var(–4);border-radius:var(–rad);overflow:hidden;margin-bottom:12px}
+.ch{padding:10px 16px;border-bottom:1px solid var(–4);display:flex;align-items:center;justify-content:space-between}
+.ct{font-size:10px;font-weight:400;text-transform:uppercase;letter-spacing:.9px;color:var(–3)}
 
-        .floating-element:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: -2s; }
-        .floating-element:nth-child(2) { width: 120px; height: 120px; top: 60%; left: 80%; animation-delay: -8s; }
-        .floating-element:nth-child(3) { width: 60px; height: 60px; top: 80%; left: 20%; animation-delay: -15s; }
+/* ─ HOME ─ */
+.home-wrap{max-width:560px}
+.hi{font-size:22px;font-weight:300;letter-spacing:-.5px;margin-bottom:4px}
+.hn{font-size:12.5px;color:var(–3);font-weight:300;margin-bottom:32px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(–4);border:1px solid var(–4);border-radius:var(–rad);overflow:hidden;margin-bottom:28px}
+.stat{background:var(–w);padding:14px 16px}
+.sl{font-size:9.5px;color:var(–3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px;font-weight:300}
+.sv{font-size:20px;font-weight:200;letter-spacing:-1px;font-family:var(–m)}
+.sc{font-size:10px;margin-top:2px;font-weight:300}
+.up{color:var(–g)}.wr{color:var(–a)}.dn{color:var(–r)}
+.act-lbl{font-size:9.5px;color:var(–3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.acts{border:1px solid var(–4);border-radius:var(–rad);overflow:hidden;background:var(–w)}
+.act{padding:11px 16px;border-bottom:1px solid var(–4);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .1s}
+.act:last-child{border-bottom:none}
+.act:hover{background:var(–bg)}
+.act-ic{width:26px;height:26px;border-radius:var(–rad);border:1px solid var(–4);display:flex;align-items:center;justify-content:center;font-size:10.5px;flex-shrink:0;color:var(–3)}
+.act-nm{font-size:12.5px;font-weight:400;flex:1}
+.act-sub{font-size:11px;color:var(–3);font-weight:300}
+.act-arr{color:var(–4);font-size:13px;margin-left:auto;transition:color .1s}
+.act:hover .act-arr{color:var(–ink)}
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
+/* ─ PORTFOLIO ─ */
+.port-wrap{max-width:680px}
+.ph{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.pt{font-size:19px;font-weight:300;letter-spacing:-.4px}
+.ps{font-size:12px;color:var(–3);font-weight:300;margin-top:2px}
+.row{padding:10px 16px;border-bottom:1px solid var(–4);display:flex;align-items:center;gap:10px;cursor:pointer;transition:background .08s}
+.row:last-child{border-bottom:none}.row:hover{background:var(–bg)}
+.rn{font-size:12.5px;font-weight:400;flex:1;min-width:0}
+.rs{font-size:10.5px;color:var(–3);font-weight:300;margin-top:1.5px}
+.drow{padding:10px 16px;border-bottom:1px solid var(–4);display:flex;align-items:center;gap:12px}
+.drow:last-child{border-bottom:none}
+.dn-l{font-size:12px;font-weight:300;flex:1}
+.d-tr{width:56px;height:2.5px;background:var(–4);border-radius:2px;overflow:hidden;flex-shrink:0}
+.d-fi{height:100%;border-radius:2px}
+.d-d{font-size:10px;font-family:var(–m);color:var(–3);width:24px;text-align:right}
+.arow{padding:10px 16px;border-bottom:1px solid var(–4);display:flex;gap:9px;align-items:flex-start}
+.arow:last-child{border-bottom:none}
+.a-dot{width:4px;height:4px;border-radius:50%;background:var(–4);margin-top:6px;flex-shrink:0}
+.a-t{font-size:11.5px;color:var(–2);font-weight:300;flex:1;line-height:1.5}
+.a-t b{color:var(–ink);font-weight:500}
+.a-ts{font-size:10px;font-family:var(–m);color:var(–3);white-space:nowrap}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-        .hero-content {
-            text-align: center;
-            color: white;
-            max-width: 1200px;
-            padding: 0 20px;
-            z-index: 2;
-            position: relative;
-        }
+/* ─ MARKET ─ */
+.mkt-wrap{max-width:680px}
+.filter-row{display:flex;gap:6px;margin-bottom:16px}
+.f-btn{padding:4px 11px;border-radius:20px;font-size:11.5px;font-weight:300;cursor:pointer;border:1px solid var(–4);background:var(–w);color:var(–2);font-family:var(–f);transition:all .12s}
+.f-btn:hover{border-color:var(–3);color:var(–ink)}
+.f-btn.on{background:var(–ink);color:#fff;border-color:var(–ink)}
+.pros{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.pro{background:var(–w);border:1px solid var(–4);border-radius:var(–rad);padding:14px;cursor:pointer;transition:border-color .12s,box-shadow .12s}
+.pro:hover{border-color:var(–3);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.pro-top{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.pro-av{width:30px;height:30px;border-radius:50%;background:var(–ink);color:#fff;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pro-nm{font-size:12.5px;font-weight:400}
+.pro-sp{font-size:10.5px;color:var(–3);font-weight:300}
+.pro-tags{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.ptag{padding:2px 6px;border-radius:3px;font-size:9.5px;font-family:var(–m);background:var(–bg);color:var(–2);border:1px solid var(–4)}
+.pro-foot{display:flex;justify-content:space-between;align-items:center}
+.pro-rt{font-size:12px;font-weight:400;font-family:var(–m)}
+.pro-st{font-size:9.5px;color:var(–3)}
 
-        .logo {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #00d4ff, #7c3aed, #f59e0b);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
-        }
+/* ─ VAULT ─ */
+.vault-wrap{max-width:560px}
+.hash-tag{font-size:9.5px;font-family:var(–m);color:var(–3);margin-top:1.5px}
 
-        @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
+/* ─ TOOLS ─ */
+.tools-wrap{max-width:580px}
+.trow{padding:12px 16px;border-bottom:1px solid var(–4);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background .08s}
+.trow:last-child{border-bottom:none}.trow:hover{background:var(–bg)}
+.t-ic{width:28px;height:28px;border-radius:var(–rad);border:1px solid var(–4);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0}
+.t-nm{font-size:12.5px;font-weight:400}
+.t-ds{font-size:11px;color:var(–3);font-weight:300}
+.t-bk{margin-left:auto;flex-shrink:0;font-size:9px;font-family:var(–m);padding:2px 5px;border-radius:3px;background:var(–ink);color:#fff;text-transform:uppercase;letter-spacing:.3px}
 
-        .subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 30px;
-            color: #00d4ff;
-            font-weight: 600;
-        }
+/* ─ PROGRESS ─ */
+.prow{padding:9px 16px;border-bottom:1px solid var(–4)}
+.prow:last-child{border-bottom:none}
+.ptr{display:flex;justify-content:space-between;margin-bottom:4px}
+.pl{font-size:11.5px;font-weight:300;color:var(–2)}
+.pv{font-size:10.5px;font-family:var(–m);color:var(–ink)}
+.pbar{height:2.5px;background:var(–bg);border-radius:2px;overflow:hidden}
+.pfi{height:100%;background:var(–ink);border-radius:2px}
 
-        .conference-title {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            line-height: 1.2;
-        }
+/* ─ DRAFT ─ */
+.dbox{margin:0 16px 14px;padding:12px 14px;background:var(–bg);border:1px solid var(–4);border-radius:var(–rad)}
+.dbox-l{font-size:9px;font-family:var(–m);color:var(–3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.dbox-t{font-size:11.5px;color:var(–2);line-height:1.7;font-weight:300}
+.dbox-t b{color:var(–ink);font-weight:500}
+.dbox-a{margin-top:8px;display:flex;gap:5px}
 
-        .description {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+/* ─ MODAL ─ */
+.mbg{position:fixed;inset:0;z-index:500;background:rgba(248,247,244,.88);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s}
+.mbg.on{opacity:1;pointer-events:all}
+.mbox{width:min(420px,92vw);background:var(–w);border:1px solid var(–4);border-radius:7px;box-shadow:0 6px 24px rgba(0,0,0,.08);transform:translateY(5px);transition:transform .15s}
+.mbg.on .mbox{transform:translateY(0)}
+.mt{padding:15px 18px 12px;border-bottom:1px solid var(–4);display:flex;align-items:flex-start;justify-content:space-between}
+.mt-ti{font-size:14px;font-weight:400;letter-spacing:-.2px}
+.mt-su{font-size:11px;color:var(–3);font-weight:300;margin-top:2px}
+.mx{font-size:15px;color:var(–3);cursor:pointer;background:none;border:none;padding:2px;line-height:1}.mx:hover{color:var(–ink)}
+.mb{padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.mf{padding:11px 18px;border-top:1px solid var(–4);display:flex;justify-content:flex-end;gap:7px}
+.fi{display:flex;flex-direction:column;gap:4px}
+.fi label{font-size:9.5px;color:var(–3);text-transform:uppercase;letter-spacing:.7px}
+.fi input,.fi textarea,.fi select{background:var(–bg);border:1px solid var(–4);border-radius:var(–rad);padding:7px 10px;font-family:var(–f);font-size:12.5px;color:var(–ink);outline:none;transition:border-color .12s;resize:none}
+.fi input:focus,.fi textarea:focus,.fi select:focus{border-color:var(–3)}
+.fi textarea{min-height:60px}
+.fi select option{background:#fff}
 
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
+/* ─ SCROLLBAR ─ */
+.view::-webkit-scrollbar{width:3px}.view::-webkit-scrollbar-track{background:transparent}.view::-webkit-scrollbar-thumb{background:var(–4);border-radius:2px}
+</style>
 
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #00d4ff, #7c3aed);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid #00d4ff;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
-        }
-
-        .details-section {
-            padding: 100px 20px;
-            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 60px;
-            color: #1a1a2e;
-            font-weight: 700;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .detail-card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(0, 212, 255, 0.1);
-        }
-
-        .detail-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #00d4ff, #7c3aed);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #1a1a2e;
-        }
-
-        .card-text {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .timeline {
-            background: white;
-            padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .timeline-day {
-            background: linear-gradient(45deg, #00d4ff, #7c3aed);
-            color: white;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-right: 30px;
-            font-weight: 700;
-        }
-
-        .timeline-content {
-            flex: 1;
-            padding-top: 10px;
-        }
-
-        .timeline-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #1a1a2e;
-        }
-
-        .timeline-desc {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
-        .chief-guest {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 100px 20px;
-        }
-
-        .guest-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 60px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .guest-name {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(45deg, #00d4ff, #f59e0b);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .guest-title {
-            font-size: 1.3rem;
-            color: #00d4ff;
-            margin-bottom: 20px;
-        }
-
-        .guest-description {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .registration {
-            padding: 100px 20px;
-            background: linear-gradient(45deg, #f59e0b, #ef4444);
-            color: white;
-            text-align: center;
-        }
-
-        .registration-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 60px;
-            max-width: 600px;
-            margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 40px 0;
-        }
-
-        .countdown-item {
-            text-align: center;
-        }
-
-        .countdown-number {
-            font-size: 3rem;
-            font-weight: 900;
-            display: block;
-        }
-
-        .countdown-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .conference-title {
-                font-size: 1.8rem;
-            }
-            
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .description {
-                font-size: 1rem;
-            }
-            
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .details-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .timeline-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .timeline-day {
-                margin: 0 auto 20px auto;
-            }
-            
-            .countdown {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="floating-elements">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
+
+<!-- NAV -->
+
+<nav>
+  <div class="logo" onclick="go('home')">
+    <div class="logo-sq">M</div>
+    Manatune
+  </div>
+  <div class="tabs">
+    <button class="tab on" id="t-home"        onclick="go('home',this)">Home</button>
+    <button class="tab"    id="t-portfolio"   onclick="go('portfolio',this)">Portfolio <span class="tab-badge">2!</span></button>
+    <button class="tab"    id="t-marketplace" onclick="go('marketplace',this)">Marketplace</button>
+    <button class="tab"    id="t-vault"       onclick="go('vault',this)">Idea Vault</button>
+    <button class="tab"    id="t-tools"       onclick="go('tools',this)">AI Tools <span class="tab-dot"></span></button>
+  </div>
+  <div class="nav-r">
+    <button class="btn bo bsm" onclick="M('new-filing')">+ New filing</button>
+    <button class="btn bs bsm" onclick="M('new-idea')">Capture idea</button>
+    <div class="av">JA</div>
+  </div>
+</nav>
+
+<!-- VIEWS -->
+
+<div class="views">
+
+<!-- HOME -->
+
+<div class="view on" id="v-home">
+  <div class="home-wrap">
+    <div class="hi">Good morning, Jordan.</div>
+    <div class="hn">2 items need your attention — <span style="color:var(--r);cursor:pointer" onclick="M('deadlines')">view deadlines ›</span></div>
+
+```
+<div class="stats">
+  <div class="stat"><div class="sl">Filings</div><div class="sv">24</div><div class="sc up">+4 this qtr</div></div>
+  <div class="stat"><div class="sl">Pending</div><div class="sv">7</div><div class="sc wr">2 urgent</div></div>
+  <div class="stat"><div class="sl">Protected</div><div class="sv">18</div><div class="sc up">+3 new</div></div>
+  <div class="stat"><div class="sl">Value est.</div><div class="sv">$2.4M</div><div class="sc up">+14%</div></div>
+</div>
+
+<div class="act-lbl">Quick actions</div>
+<div class="acts">
+  <div class="act" onclick="M('patent')">
+    <div class="act-ic">⬡</div>
+    <div><div class="act-nm">File a patent</div><div class="act-sub">Utility, design, or PCT</div></div>
+    <span class="act-arr">›</span>
+  </div>
+  <div class="act" onclick="M('trademark')">
+    <div class="act-ic">™</div>
+    <div><div class="act-nm">Register a trademark</div><div class="act-sub">Brand, logo, or slogan</div></div>
+    <span class="act-arr">›</span>
+  </div>
+  <div class="act" onclick="M('new-idea')">
+    <div class="act-ic">◈</div>
+    <div><div class="act-nm">Capture an idea</div><div class="act-sub">Timestamp to vault</div></div>
+    <span class="act-arr">›</span>
+  </div>
+  <div class="act" onclick="go('tools')">
+    <div class="act-ic">✦</div>
+    <div><div class="act-nm">Draft with AI</div><div class="act-sub">Generate claims, prior art search</div></div>
+    <span class="p pg" style="font-size:9px;padding:2px 6px">Live</span>
+    <span class="act-arr">›</span>
+  </div>
+  <div class="act" onclick="go('marketplace')">
+    <div class="act-ic">◌</div>
+    <div><div class="act-nm">Find an expert</div><div class="act-sub">Verified attorneys & agents</div></div>
+    <span class="act-arr">›</span>
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+
+<div class="view" id="v-portfolio">
+  <div class="port-wrap">
+    <div class="ph">
+      <div><div class="pt">Portfolio</div><div class="ps">24 filings · 18 active</div></div>
+      <button class="btn bs bsm" onclick="M('new-filing')">+ Add</button>
+    </div>
+
+```
+<div class="g2" style="margin-bottom:12px">
+  <div class="card">
+    <div class="ch"><span class="ct">Active filings</span><span onclick="go('portfolio')" style="font-size:11px;color:var(--3);cursor:pointer">4 of 24 shown</span></div>
+    <div class="row"><div><div class="rn">SmartSync Algorithm v2</div><div class="rs">Patent · USPTO · Ref 18/445,331</div></div><span class="p pr">8d</span><span class="p pg">Active</span></div>
+    <div class="row"><div><div class="rn">Manatune™ Brand Mark</div><div class="rs">Trademark · USPTO · IC 42</div></div><span class="p pa">21d</span><span class="p pa">Pending</span></div>
+    <div class="row"><div><div class="rn">XR Interface Design System</div><div class="rs">Copyright</div></div><span class="p pn">—</span><span class="p pb">Review</span></div>
+    <div class="row" style="opacity:.55"><div><div class="rn">Neural Mesh Compression</div><div class="rs">Patent PCT · Draft</div></div><span class="p pn">—</span><span class="p pn">Draft</span></div>
+  </div>
+
+  <div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="ch"><span class="ct">Deadlines</span></div>
+      <div class="drow"><div class="dn-l">SmartSync renewal</div><div class="d-tr"><div class="d-fi" style="width:90%;background:var(--r)"></div></div><div class="d-d dn">8d</div></div>
+      <div class="drow"><div class="dn-l">Manatune™ response</div><div class="d-tr"><div class="d-fi" style="width:58%;background:var(--a)"></div></div><div class="d-d wr">21d</div></div>
+      <div class="drow"><div class="dn-l">PCT national phase</div><div class="d-tr"><div class="d-fi" style="width:32%;background:var(--ink)"></div></div><div class="d-d">44d</div></div>
+      <div class="drow"><div class="dn-l">Design copyright</div><div class="d-tr"><div class="d-fi" style="width:15%;background:var(--3)"></div></div><div class="d-d">62d</div></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="ct">Health</span></div>
+      <div class="prow"><div class="ptr"><span class="pl">Filing completion</span><span class="pv">78%</span></div><div class="pbar"><div class="pfi" style="width:78%"></div></div></div>
+      <div class="prow"><div class="ptr"><span class="pl">Renewal health</span><span class="pv">91%</span></div><div class="pbar"><div class="pfi" style="width:91%"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="ch"><span class="ct">Recent activity</span></div>
+  <div class="arow"><div class="a-dot" style="background:var(--g)"></div><div class="a-t"><b>USPTO confirmed</b> SmartSync receipt</div><div class="a-ts">2h ago</div></div>
+  <div class="arow"><div class="a-dot"></div><div class="a-t">AI draft for <b>Neural Mesh</b> ready to review</div><div class="a-ts">5h ago</div></div>
+  <div class="arow"><div class="a-dot" style="background:var(--a)"></div><div class="a-t"><b>Sarah Chen</b> reviewed trademark brief</div><div class="a-ts">1d ago</div></div>
+  <div class="arow"><div class="a-dot"></div><div class="a-t">Idea timestamped: <b>Quantum UI Model</b></div><div class="a-ts">2d ago</div></div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- MARKETPLACE -->
+
+<div class="view" id="v-marketplace">
+  <div class="mkt-wrap">
+    <div class="ph">
+      <div><div class="pt">Marketplace</div><div class="ps">Verified IP professionals · 400+</div></div>
+    </div>
+    <div class="filter-row">
+      <button class="f-btn on">All</button>
+      <button class="f-btn" onclick="filt(this)">Patents</button>
+      <button class="f-btn" onclick="filt(this)">Trademarks</button>
+      <button class="f-btn" onclick="filt(this)">Copyrights</button>
+      <button class="f-btn" onclick="filt(this)">Strategy</button>
+    </div>
+    <div class="pros">
+      <div class="pro" onclick="M('hire-pro')">
+        <div class="pro-top"><div class="pro-av">SC</div><div><div class="pro-nm">Sarah Chen</div><div class="pro-sp">Patent Attorney · USPTO</div></div><span class="p pg" style="margin-left:auto">Open</span></div>
+        <div class="pro-tags"><span class="ptag">Software IP</span><span class="ptag">AI/ML</span><span class="ptag">PCT</span></div>
+        <div class="pro-foot"><div class="pro-st">★★★★★ 4.9</div><div class="pro-rt">$420/hr</div></div>
+      </div>
+      <div class="pro" onclick="M('hire-pro')">
+        <div class="pro-top"><div class="pro-av">MR</div><div><div class="pro-nm">Marcus Reid</div><div class="pro-sp">Trademark Specialist</div></div><span class="p pg" style="margin-left:auto">Open</span></div>
+        <div class="pro-tags"><span class="ptag">Trademarks</span><span class="ptag">Brand IP</span></div>
+        <div class="pro-foot"><div class="pro-st">★★★★★ 4.8</div><div class="pro-rt">$310/hr</div></div>
+      </div>
+      <div class="pro" onclick="M('hire-pro')">
+        <div class="pro-top"><div class="pro-av">AK</div><div><div class="pro-nm">Anita Kapoor</div><div class="pro-sp">IP Strategist · Global</div></div><span class="p pg" style="margin-left:auto">Open</span></div>
+        <div class="pro-tags"><span class="ptag">Strategy</span><span class="ptag">Licensing</span></div>
+        <div class="pro-foot"><div class="pro-st">★★★★★ 4.9</div><div class="pro-rt">$390/hr</div></div>
+      </div>
+      <div class="pro">
+        <div class="pro-top"><div class="pro-av">DL</div><div><div class="pro-nm">David Lin</div><div class="pro-sp">Copyright Law</div></div><span class="p pa" style="margin-left:auto">Busy</span></div>
+        <div class="pro-tags"><span class="ptag">Copyrights</span><span class="ptag">Digital IP</span></div>
+        <div class="pro-foot"><div class="pro-st">★★★★½ 4.7</div><div class="pro-rt">$280/hr</div></div>
+      </div>
+      <div class="pro" onclick="M('hire-pro')">
+        <div class="pro-top"><div class="pro-av">YM</div><div><div class="pro-nm">Yuki Mori</div><div class="pro-sp">Patent Agent · JP/US</div></div><span class="p pg" style="margin-left:auto">Open</span></div>
+        <div class="pro-tags"><span class="ptag">Hardware</span><span class="ptag">Robotics</span></div>
+        <div class="pro-foot"><div class="pro-st">★★★★★ 5.0</div><div class="pro-rt">$460/hr</div></div>
+      </div>
+      <div class="pro" style="display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border-style:dashed;opacity:.35;cursor:pointer">
+        <div style="font-size:15px;color:var(--3)">+</div>
+        <div style="font-size:11px;color:var(--3)">395 more</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VAULT -->
+
+<div class="view" id="v-vault">
+  <div class="vault-wrap">
+    <div class="ph">
+      <div><div class="pt">Idea Vault</div><div class="ps">Blockchain-anchored · 4 ideas secured</div></div>
+      <button class="btn bs bsm" onclick="M('new-idea')">+ Capture</button>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="ct">Your ideas</span><span class="p pg">Verified</span></div>
+      <div class="row">
+        <div style="flex:1;min-width:0"><div class="rn">Quantum UI Interaction Model</div><div class="hash-tag">0x7c3f…a91e · Feb 12 2025</div></div>
+        <span class="p pn">Solo</span><span class="p pg">Protected</span>
+      </div>
+      <div class="row">
+        <div style="flex:1;min-width:0"><div class="rn">Adaptive Haptic Feedback for XR</div><div class="hash-tag">0xa3d1…b55c · Jan 28 2025</div></div>
+        <span class="p pb">3 collabs</span><span class="p pb">Developing</span>
+      </div>
+      <div class="row">
+        <div style="flex:1;min-width:0"><div class="rn">Biometric IP Ownership Verification</div><div class="hash-tag">0x9e2b…d44f · Jan 15 2025</div></div>
+        <span class="p pn">Solo</span><span class="p pa">Filing soon</span>
+      </div>
+      <div class="row" style="opacity:.45">
+        <div style="flex:1;min-width:0"><div class="rn">Neural Search Interface</div><div class="hash-tag">Encrypted · NDA restricted</div></div>
+        <span class="p pn">Private</span><span class="p pn">Draft</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AI TOOLS -->
+
+<div class="view" id="v-tools">
+  <div class="tools-wrap">
+    <div class="ph">
+      <div><div class="pt">AI Tools</div><div class="ps">Accelerate your IP workflows</div></div>
+      <span class="p pn" style="margin-top:4px">Claude-powered</span>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="ch"><span class="ct">Tools</span></div>
+      <div class="trow" onclick="M('ai-patent')"><div class="t-ic">⬡</div><div><div class="t-nm">Patent claim drafter</div><div class="t-ds">Generate claims from your disclosure</div></div><span class="t-bk">New</span></div>
+      <div class="trow" onclick="M('ai-search')"><div class="t-ic">⊕</div><div><div class="t-nm">Prior art search</div><div class="t-ds">USPTO, EPO, WIPO databases</div></div></div>
+      <div class="trow"><div class="t-ic">™</div><div><div class="t-nm">Trademark clearance</div><div class="t-ds">Screen across 100+ jurisdictions</div></div></div>
+      <div class="trow"><div class="t-ic">◫</div><div><div class="t-nm">Specification writer</div><div class="t-ds">Auto-generate patent specs</div></div></div>
+      <div class="trow"><div class="t-ic">⚖</div><div><div class="t-nm">Office action responder</div><div class="t-ds">Draft USPTO / EPO responses</div></div><span class="t-bk" style="background:var(--3)">Beta</span></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="ct">Active draft · Neural Mesh Compression</span></div>
+      <div class="dbox">
+        <div class="dbox-l">Claim 1 — independent</div>
+        <div class="dbox-t"><b>Claim 1.</b> A system for compressing neural network weights comprising: a sparse encoding module configured to identify and encode non-zero weight values; a hierarchical compression layer operable to reduce dimensionality while preserving inference accuracy…</div>
+        <div class="dbox-a">
+          <button class="btn bo bsm">Refine</button>
+          <button class="btn bo bsm">Expand</button>
+          <button class="btn bs bsm">Continue →</button>
         </div>
-        
-        <div class="hero-content">
-            <h1 class="logo">SSL's LAW 4.0</h1>
-            <p class="subtitle">Three-Day National Conference</p>
-            <h2 class="conference-title">Legal Frameworks for Technology, Innovation & Digital Services in a Changing World</h2>
-            <p class="description">
-                Exploring the evolving intersection of law, technology, and digital governance through cutting-edge research, 
-                expert presentations, and visionary insights from industry leaders and academicians.
-            </p>
-            <div class="cta-buttons">
-                <a href="#registration" class="btn btn-primary pulse">Register Now</a>
-                <a href="#details" class="btn btn-secondary">Learn More</a>
-            </div>
-        </div>
-    </section>
+      </div>
+      <div style="padding:0 16px 12px">
+        <div style="font-size:9px;font-family:var(--m);color:var(--3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px">Prior art summary</div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span style="font-size:11.5px;color:var(--2);font-weight:300">Novelty risk</span><span class="p pg">Low · 12%</span></div>
+        <div class="pbar"><div class="pfi" style="width:12%;background:var(--g)"></div></div>
+        <div style="font-size:10px;color:var(--3);margin-top:4px">3 close references · 0 blocking patents</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <section id="details" class="details-section">
-        <div class="container">
-            <h2 class="section-title">Conference Highlights</h2>
-            <div class="details-grid">
-                <div class="detail-card">
-                    <div class="card-icon">📚</div>
-                    <h3 class="card-title">Academic Excellence</h3>
-                    <p class="card-text">
-                        Paper presentations and lecture series by students and academicians from eminent institutions, 
-                        fostering dialogue on contemporary legal challenges in the digital era.
-                    </p>
-                </div>
-                
-                <div class="detail-card">
-                    <div class="card-icon">🏆</div>
-                    <h3 class="card-title">Recognition & Awards</h3>
-                    <p class="card-text">
-                        Prize distribution for Best Paper Presentation and Best Research Paper, 
-                        celebrating outstanding contributions to legal scholarship and innovation.
-                    </p>
-                </div>
-                
-                <div class="detail-card">
-                    <div class="card-icon">🎤</div>
-                    <h3 class="card-title">Exclusive Interview</h3>
-                    <p class="card-text">
-                        Exclusive interview with the Chief Guest offering valuable insights into the State's 
-                        vision for technology, innovation, and digital services.
-                    </p>
-                </div>
-            </div>
+</div><!-- /views -->
 
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-day">
-                        <span style="font-size: 1.2rem;">DAY</span>
-                        <span style="font-size: 1.8rem;">1-2</span>
-                    </div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">Academic Sessions</h3>
-                        <p class="timeline-desc">
-                            Comprehensive paper presentations and lecture series featuring research from students 
-                            and academicians. These sessions will explore the latest developments in technology law, 
-                            digital governance, and innovation policy.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-day">
-                        <span style="font-size: 1.2rem;">DAY</span>
-                        <span style="font-size: 1.8rem;">3</span>
-                    </div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">Valedictory Program</h3>
-                        <p class="timeline-desc">
-                            Grand finale featuring the Chief Guest address, award ceremonies, and an exclusive 
-                            interview session. This culminating event will provide strategic insights into the 
-                            future of technology and digital services.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- MODAL -->
 
-    <section class="chief-guest">
-        <div class="container">
-            <h2 class="section-title" style="color: white;">Distinguished Chief Guest</h2>
-            <div class="guest-card">
-                <h3 class="guest-name">Dr. Palanivel Thiaga Rajan</h3>
-                <p class="guest-title">Hon'ble Minister for Information Technology and Digital Services</p>
-                <p class="guest-title">Government of Tamil Nadu</p>
-                <p class="guest-description">
-                    Join us for an inspiring address from Dr. Palanivel Thiaga Rajan, who will share his vision 
-                    for technology, innovation, and digital services. His insights will illuminate the path forward 
-                    for legal frameworks in our rapidly evolving digital landscape.
-                </p>
-            </div>
-        </div>
-    </section>
+<div class="mbg" id="mbg" onclick="closeM(event)">
+  <div class="mbox">
+    <div class="mt"><div><div class="mt-ti" id="mti"></div><div class="mt-su" id="msu"></div></div><button class="mx" onclick="closeM()">✕</button></div>
+    <div class="mb" id="mbd"></div>
+    <div class="mf" id="mft"></div>
+  </div>
+</div>
 
-    <section id="registration" class="registration">
-        <div class="container">
-            <div class="registration-card">
-                <h2 class="section-title" style="color: white; margin-bottom: 30px;">Join the Future of Legal Technology</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9;">
-                    Don't miss this unprecedented opportunity to be part of a transformative conference 
-                    that will shape the future of law and technology.
-                </p>
-                
-                <div class="countdown">
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="days">30</span>
-                        <span class="countdown-label">Days</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="hours">12</span>
-                        <span class="countdown-label">Hours</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="minutes">45</span>
-                        <span class="countdown-label">Minutes</span>
-                    </div>
-                    <div class="countdown-item">
-                        <span class="countdown-number" id="seconds">30</span>
-                        <span class="countdown-label">Seconds</span>
-                    </div>
-                </div>
-                
-                <a href="#" class="btn btn-primary" style="font-size: 1.3rem; padding: 20px 40px;">
-                    Secure Your Spot Now
-                </a>
-            </div>
-        </div>
-    </section>
+<script>
+// ─ Tab navigation with animated transition ─
+let cur = 'home';
+function go(id, el) {
+  if (id === cur) return;
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  const prev = document.getElementById('v-' + cur);
+  const next = document.getElementById('v-' + id);
 
-        // Animate countdown (demo countdown)
-        function updateCountdown() {
-            const days = document.getElementById('days');
-            const hours = document.getElementById('hours');
-            const minutes = document.getElementById('minutes');
-            const seconds = document.getElementById('seconds');
+  // Outgoing
+  prev.classList.remove('on');
+  prev.classList.add('out-up');
+  setTimeout(() => prev.classList.remove('out-up'), 280);
 
-            setInterval(() => {
-                let currentSeconds = parseInt(seconds.textContent);
-                let currentMinutes = parseInt(minutes.textContent);
-                let currentHours = parseInt(hours.textContent);
-                let currentDays = parseInt(days.textContent);
+  // Incoming (slight delay for snap feel)
+  setTimeout(() => {
+    next.style.transform = 'translateY(10px)';
+    next.style.opacity = '0';
+    next.classList.add('on');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        next.style.transform = '';
+        next.style.opacity = '';
+      });
+    });
+  }, 60);
 
-                currentSeconds--;
+  // Tabs
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  const tab = el || document.getElementById('t-' + id);
+  if (tab) tab.classList.add('on');
 
-                if (currentSeconds < 0) {
-                    currentSeconds = 59;
-                    currentMinutes--;
-                }
+  cur = id;
+}
 
-                if (currentMinutes < 0) {
-                    currentMinutes = 59;
-                    currentHours--;
-                }
+// ─ Filter buttons (marketplace) ─
+function filt(el) {
+  document.querySelectorAll('.f-btn').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+}
 
-                if (currentHours < 0) {
-                    currentHours = 23;
-                    currentDays--;
-                }
+// ─ Modals ─
+const MD = {
+  'new-filing':{t:'New filing',s:'Patent, trademark, copyright, or design.',
+    b:`<div class="fi"><label>Type</label><select><option>Patent</option><option>Trademark</option><option>Copyright</option><option>Design patent</option></select></div>
+       <div class="fi"><label>Title</label><input placeholder="e.g. SmartSync Navigation System"/></div>
+       <div class="fi"><label>Jurisdiction</label><select><option>United States (USPTO)</option><option>European Union (EPO)</option><option>International (PCT)</option></select></div>`,
+    f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bs bsm" onclick="closeM()">Create →</button>`},
+  'new-idea':{t:'Capture idea',s:'Cryptographically timestamped and secured.',
+    b:`<div class="fi"><label>Title</label><input placeholder="Name your idea"/></div>
+       <div class="fi"><label>Description</label><textarea placeholder="Describe in detail…"></textarea></div>
 
-                if (currentDays < 0) {
-                    currentDays = 0;
-                    currentHours = 0;
-                    currentMinutes = 0;
-                    currentSeconds = 0;
-                }
+```
+   <div class="fi"><label>Visibility</label><select><option>Private</option><option>Shared with collaborators</option></select></div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bs bsm" onclick="closeM()">Timestamp & secure →</button>`},
+```
 
-                days.textContent = currentDays.toString().padStart(2, '0');
-                hours.textContent = currentHours.toString().padStart(2, '0');
-                minutes.textContent = currentMinutes.toString().padStart(2, '0');
-                seconds.textContent = currentSeconds.toString().padStart(2, '0');
-            }, 1000);
-        }
+‘hire-pro’:{t:‘Hire professional’,s:‘Send a brief — quote within 24 hours.’,
+b:`<div class="fi"><label>Project</label><select><option>Patent drafting</option><option>Trademark application</option><option>Copyright registration</option><option>IP strategy</option></select></div> <div class="fi"><label>Brief</label><textarea placeholder="What do you need?"></textarea></div> <div class="fi"><label>Budget</label><select><option>Under $1,000</option><option>$1,000–$5,000</option><option>$5,000–$15,000</option><option>$15,000+</option></select></div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bs bsm" onclick="closeM()">Send brief →</button>`},
+‘patent’:{t:‘File a patent’,s:‘Utility, design, or provisional.’,
+b:`<div class="fi"><label>Type</label><select><option>Utility patent</option><option>Provisional patent</option><option>Design patent</option><option>PCT</option></select></div> <div class="fi"><label>Title</label><input placeholder="Technical title"/></div> <div class="fi"><label>Inventors</label><input placeholder="Full legal names"/></div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bo bsm" onclick="closeM()">Use AI drafter</button><button class="btn bs bsm" onclick="closeM()">Begin →</button>`},
+‘trademark’:{t:‘Register trademark’,s:‘Brand name, logo, or slogan.’,
+b:`<div class="fi"><label>Mark type</label><select><option>Word mark</option><option>Logo / design mark</option><option>Slogan</option></select></div> <div class="fi"><label>Mark</label><input placeholder="Text or design description"/></div> <div class="fi"><label>Class</label><select><option>IC 42 – Technology</option><option>IC 9 – Software</option><option>IC 35 – Business</option></select></div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bs bsm" onclick="closeM()">Start clearance →</button>`},
+‘ai-patent’:{t:‘Patent claim drafter’,s:‘AI generates initial claims from your disclosure.’,
+b:`<div class="fi"><label>Technical field</label><input placeholder="e.g. Machine learning"/></div> <div class="fi"><label>Summary</label><textarea placeholder="What does it do?"></textarea></div> <div class="fi"><label>Key novelty</label><textarea placeholder="What makes it unique?"></textarea></div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bs bsm" onclick="closeM()">Generate →</button>`},
+‘ai-search’:{t:‘Prior art search’,s:‘Search global patent databases.’,
+b:`<div class="fi"><label>Query</label><textarea placeholder="Describe your invention…"></textarea></div> <div class="fi"><label>Scope</label><select><option>US (USPTO)</option><option>Global (EPO, WIPO)</option><option>Literature + patents</option></select></div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Cancel</button><button class="btn bs bsm" onclick="closeM()">Run search →</button>`},
+‘deadlines’:{t:‘Urgent deadlines’,s:‘2 items require immediate action.’,
+b:`<div style="display:flex;flex-direction:column;gap:7px"> <div style="padding:10px 12px;background:var(--bg);border:1px solid var(--4);border-radius:var(--rad);display:flex;justify-content:space-between;align-items:center"> <div><div style="font-size:12.5px;font-weight:400">SmartSync renewal</div><div style="font-size:10.5px;color:var(--3)">Patent · USPTO</div></div><span class="p pr">8 days</span></div> <div style="padding:10px 12px;background:var(--bg);border:1px solid var(--4);border-radius:var(--rad);display:flex;justify-content:space-between;align-items:center"> <div><div style="font-size:12.5px;font-weight:400">Manatune™ office action</div><div style="font-size:10.5px;color:var(--3)">Trademark · USPTO</div></div><span class="p pa">21 days</span></div> </div>`,
+f:`<button class="btn bo bsm" onclick="closeM()">Dismiss</button><button class="btn bs bsm" onclick="go('portfolio');closeM()">Go to portfolio →</button>`}
+};
 
-        updateCountdown();
+function M(id) {
+const m = MD[id] || {t:‘Coming soon’,s:‘This feature is on the roadmap.’,b:’’,f:`<button class="btn bs bsm" onclick="closeM()">Close</button>`};
+document.getElementById(‘mti’).textContent = m.t;
+document.getElementById(‘msu’).textContent = m.s;
+document.getElementById(‘mbd’).innerHTML = m.b;
+document.getElementById(‘mft’).innerHTML = m.f;
+document.getElementById(‘mbg’).classList.add(‘on’);
+}
+function closeM(e) {
+if (!e || e.target === document.getElementById(‘mbg’))
+document.getElementById(‘mbg’).classList.remove(‘on’);
+}
+document.addEventListener(‘keydown’, e => { if (e.key === ‘Escape’) document.getElementById(‘mbg’).classList.remove(‘on’); });
+</script>
 
-        // Add scroll animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe cards for animation
-        document.querySelectorAll('.detail-card, .timeline-item, .guest-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Add dynamic gradient animation to hero
-        const hero = document.querySelector('.hero');
-        let gradientAngle = 135;
-        
-        setInterval(() => {
-            gradientAngle += 0.5;
-            hero.style.background = `linear-gradient(${gradientAngle}deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)`;
-        }, 100);
-    </script>
 </body>
 </html>
